@@ -16,7 +16,7 @@ echo "Get one specific item"
 curl -sX GET "${endpoint}/Prod/todos/${id}" | jq
 
 echo "Update one to have a snake"
-curl -sX PUT "${endpoint}/Prod/todos/${id}" --data '{ "text": "Learn python and more", "checked": true }'
+curl -sX PUT "${endpoint}/Prod/todos/${id}" --data '{ "text": "Learn python and more", "checked": true }' echo
 echo "Items: $(curl -sX GET "${endpoint}/Prod/todos" | jq '.|length')"
 echo "There are $(curl -sX GET "${endpoint}/Prod/todos" | grep 'python' | wc -l)  snakes in the collection "
 
