@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 endpoint="https://${1}.execute-api.us-east-1.amazonaws.com"
 #endpoint="https://bmvkmge31l.execute-api.us-east-1.amazonaws.com"
