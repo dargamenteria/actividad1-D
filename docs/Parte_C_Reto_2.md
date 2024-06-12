@@ -478,6 +478,9 @@ aws_eip.eips["vpn"]: Refreshing state... [id=eipalloc-05daf7f68cc565cc8]
 
 No changes. Your infrastructure matches the configuration.
 ```
+##### Nota
+Esta plan de ejecución es viejo y no se corresponde al 100% con lo que se despliega, se actualizaron algunos detalles como los SGs, nombres de instancias y etiquetas.
+
 
 ## Acceso a la instancia
 
