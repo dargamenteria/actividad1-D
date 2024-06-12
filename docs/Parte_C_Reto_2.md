@@ -82,6 +82,21 @@ con aws cli\
 
 Usamos una serie de scripts de terraform para crear automáticamente la
 instancia
+### Notas adicionales
+Se ha utilizado al final una instancia t3.medium, era la muerte a pellizcos esperar a que levantara la imagen de Jenkins en las t3 de categoria inferior
+Cada vez que se pone en los grupos de seguiridad un 0.0.0.0/0 mueren siete gatos en cada pueblo de Asturies y los primogénitos varones de las ciudades, aunque se ha mantenido para seguir las peticiones de la documentación. Se puede establecer el valor de determinadas ips en el fichero `./iac/resources/ips.yaml`.
+```yaml
+#IPS de servicios
+
+#IPS personales
+arga: aaa.bbb.ccc.ddd
+```
+y referenciarla luego en la configuración del grupo de seguridad
+```
+    sg = "sg1", from = 80, to = 80, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow http [tf]"
+    sg = "sg1", from = 8080, to = 8080, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow 8080 [tf]"
+    sg = "sg1", from = 22, to = 22, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow ssh  [tf]"
+```
 
 ### Variables
 
