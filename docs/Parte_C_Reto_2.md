@@ -39,9 +39,9 @@ los ficheros \$HOME/.aws/credentias y \$HOME/.aws/config
 ``` bash
 $ cat /home/dani/.aws/credentials
 [unir]
-aws_access_key_id=ASIA3OZISFTMUXG77BMC
-aws_secret_access_key=yrytKwU+jQKY8w/0xisXboGnWrst3vaNce2Kso5l
-aws_session_token=IQoJb3JpZ2luX2VjEL3//////////wEaCXVzLXdlc3QtMiJGMEQCIFOCUvrK95RU/mYG4nMBL8ZvDREQJ3FaLqKMmmzX1WBgAiBZu1T1YDEvY6EZV1Oq3LWPFkC++f4yWH4SQqyaSWBnKSrCAghWEAAaDDc4NzY3NDcwNTExMyIMrXk4QUGoasHSAVFtKp8CkvPhN768spSN48PF7HaKTk3Vozn8G61FKq0cN0JyggITQzoZ75sXt3ZebbeHbsbYrfKbSxsXlnwEOwaJPCyMGPVQXxUf
+aws_access_key_id=xxxxx
+aws_secret_access_key=xxxxx
+aws_session_token=xxxxxx
 ```
 
 -   Config file
