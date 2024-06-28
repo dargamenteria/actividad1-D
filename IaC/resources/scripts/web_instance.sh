@@ -7,3 +7,4 @@ echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
   /etc/apt/sources.list.d/jenkins.list >/dev/null
 sudo apt-get update
 sudo apt-get install jenkins
+sudo apt install -y ca-certificates curl python3-flask junit flake8 python3-flake8 bandit python3-bandit python3-pip
