@@ -21,7 +21,7 @@ pipeline {
           pipelineBanner()
           sh ('''
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
-            git clone https://${GIT_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
+            git clone https://github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             '''
           )
           stash  (name: 'workspace')
