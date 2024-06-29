@@ -25,6 +25,7 @@ pipeline {
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             git checkout develop
+            cat testDevel
             '''
           )
           stash  (name: 'workspace')
@@ -157,11 +158,13 @@ pipeline {
           unstash 'workspace'
           sh ('''
             cd "$WORKSPACE/gitCode"
-            
-            git checkout master
-            git merge develop 
-
            
+            cat testDevel
+
+
+            git checkout master
+            git merge origin/develop 
+
             cat testDevel
 
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
