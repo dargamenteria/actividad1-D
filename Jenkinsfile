@@ -3,7 +3,10 @@
 
 pipeline {
   agent { label 'linux' }
-
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+    }
   stages {
     stage('Pipeline Info') {
       steps {
@@ -81,7 +84,7 @@ pipeline {
           sh ('''
             cd "$WORKSPACE/gitCode"
             sam build
-            sam deploy \
+            AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} sam deploy \
             --stack-name todo-aws-list-staging \
             --region eu-central-1 \
             --disable-rollback  \
