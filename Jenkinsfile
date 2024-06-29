@@ -76,7 +76,7 @@ pipeline {
       }
     }
 
-    stage ('SAM deploy') {
+    stage ('Promote') {
       agent { label 'linux' }
       steps {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -99,8 +99,6 @@ pipeline {
             unset AWS_ACCESS_KEY_ID
 
             '''
-
-
           )
         }
       } 
