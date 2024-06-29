@@ -3,10 +3,8 @@
 
 pipeline {
   agent { label 'linux' }
-  environment {
-    GIT_TOKEN=credentials ('dargamenteria_github_token')
-  }
-  stages {
+
+    stages {
     stage('Pipeline Info') {
       steps {
         sh ('echo "        pipelineBanner "')
