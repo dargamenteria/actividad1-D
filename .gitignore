@@ -8,4 +8,4 @@ coverage.xml
 global_resources/
 .terraform/
 .terraform.*
-
+terraform.tfstate*
