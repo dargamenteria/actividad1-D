@@ -161,7 +161,8 @@ pipeline {
             git checkout master
             git merge develop 
 
-            file testDevel
+           
+            cat testDevel
 
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
