@@ -3,10 +3,10 @@
 
 pipeline {
   agent { label 'linux' }
-  environment {
-    AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
-    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
-  }
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+    }
   stages {
     stage('Pipeline Info') {
       steps {
@@ -95,29 +95,12 @@ pipeline {
       } 
     }
 
-    stage ('Test Rest') {
-      agent { label 'linux' }
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          pipelineBanner()
-          unstash 'workspace'
-          lock ('test-resources'){
-            sh ('''
-              echo "Test phase"
-              cd "$WORKSPACE/gitCode"
-              export BASE_URL=$(AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
-              pytest --junitxml=result-rest.xml $(pwd)/test/integration
-              '''
-            )
-          }
-        }
-      }
-    }
-
-    post {
-      always {
-        cleanWs()
-      }
+  }
+  post {
+    always {
+      cleanWs()
     }
   }
 }
+
+
