@@ -3,10 +3,10 @@
 
 pipeline {
   agent { label 'linux' }
-    environment {
-        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
-    }
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+  }
   stages {
     stage('Pipeline Info') {
       steps {
@@ -95,9 +95,7 @@ pipeline {
       } 
     }
 
-  }
-   
-  stage ('Test Rest') {
+    stage ('Test Rest') {
       agent { label 'linux' }
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -115,6 +113,7 @@ pipeline {
         }
       }
     }
+  }
 
   post {
     always {
