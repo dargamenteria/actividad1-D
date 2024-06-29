@@ -162,6 +162,7 @@ pipeline {
             cat testDevel
 
             git fetch --all
+
             git checkout master
             git merge develop 
 
