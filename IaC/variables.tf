@@ -87,6 +87,7 @@ variable "ec2_instances" {
     ec2_snet_index    = number
     ec2_public_ip     = bool
     ec2_static_ip     = bool
+    ec2_user_data     = string
     profile           = string
     ec2_sgs           = list(string)
     ec2_root_block_device = list(object({
@@ -96,6 +97,10 @@ variable "ec2_instances" {
     }))
     ec2_tags = map(any)
   }))
+}
+
+variable "s3_bucket_names" {
+  type = list(string)
 }
 
 #variable "ec2_ami_filter" {

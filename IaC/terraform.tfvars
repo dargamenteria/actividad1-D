@@ -3,14 +3,14 @@ provider_default_tags = {
   terraform   = "true"
 }
 
-region = "us-east-1"
+region = "eu-central-1"
 
 client_name = "unir"
 
 
 vpc_name = "vpc"
 vpc_cidr = "10.153.0.0/16"
-vpc_azs  = ["us-east-1a"]
+vpc_azs  = ["eu-central-1c"]
 
 vpc_public_subnets      = ["10.153.10.0/24"]
 vpc_public_subnet_names = ["pub_snet_a"]
@@ -58,7 +58,7 @@ sgs_rules = [
 ec2_instances = {
   cloud9 = {
     enabled           = true
-    ec2_ami           = "ami-00317f1b8715ed134"
+    ec2_ami           = "ami-0d6fe2b9878a33fa8"
     ec2_instance_type = "t3.medium"
     ec2_ebs_encrypted = true
     ec2_snet          = "public"
@@ -66,7 +66,50 @@ ec2_instances = {
     ec2_static_ip     = true
     ec2_snet_index    = 0
     ec2_sgs           = ["sg1"]
-    profile           = "LabInstanceProfile"
+    ec2_user_data     = "cloud9.sh"
+    profile           = ""
+    ec2_root_block_device = [{
+      encrypted   = true
+      volume_type = "gp2"
+      volume_size = 20
+    }]
+    ec2_tags = {
+      scheduled = "workdays"
+    }
+  },
+  slave1 = {
+    enabled           = true
+    ec2_ami           = "ami-0d6fe2b9878a33fa8"
+    ec2_instance_type = "t3.small"
+    ec2_ebs_encrypted = true
+    ec2_snet          = "public"
+    ec2_public_ip     = true
+    ec2_static_ip     = true
+    ec2_snet_index    = 0
+    ec2_sgs           = ["sg1"]
+    ec2_user_data     = "slave.sh"
+    profile           = ""
+    ec2_root_block_device = [{
+      encrypted   = true
+      volume_type = "gp2"
+      volume_size = 20
+    }]
+    ec2_tags = {
+      scheduled = "workdays"
+    }
+  },
+  slave2 = {
+    enabled           = true
+    ec2_ami           = "ami-0d6fe2b9878a33fa8"
+    ec2_instance_type = "t3.small"
+    ec2_ebs_encrypted = true
+    ec2_snet          = "public"
+    ec2_public_ip     = true
+    ec2_static_ip     = true
+    ec2_snet_index    = 0
+    ec2_sgs           = ["sg1"]
+    ec2_user_data     = "slave.sh"
+    profile           = ""
     ec2_root_block_device = [{
       encrypted   = true
       volume_type = "gp2"
@@ -76,5 +119,13 @@ ec2_instances = {
       scheduled = "workdays"
     }
   }
+
+
 }
 
+s3_bucket_names = [
+  "marga-deploy-bucket",
+  "marga-deploy-bucket-prod",
+  "marga-deploy-bucket-staging",
+
+]

@@ -5,3 +5,7 @@ tests
 pyenvunittests
 .coverage
 coverage.xml
+global_resources/
+.terraform/
+.terraform.*
+
