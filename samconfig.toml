@@ -5,7 +5,7 @@ version = 0.1
 stack_name = "todo-list-aws"
 s3_bucket = "marga-deploy-bucket"
 s3_prefix = "todo-list-aws"
-region = "us-east-1"
+region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"default\""
 image_repositories = []
@@ -14,9 +14,9 @@ image_repositories = []
 [staging.deploy]
 [staging.deploy.parameters]
 stack_name = "todo-list-aws-staging"
-s3_bucket = "marga-deploy-bucket-staging"
+s3_bucket = "marga-deploy-bucket-staging-unir"
 s3_prefix = "todo-list-aws"
-region = "us-east-1"
+region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"staging\""
 image_repositories = []
@@ -25,9 +25,9 @@ image_repositories = []
 [production.deploy]
 [production.deploy.parameters]
 stack_name = "todo-list-aws-production"
-s3_bucket = "marga-deploy-bucket-prod"
+s3_bucket = "marga-deploy-bucket-prod-unir"
 s3_prefix = "todo-list-aws"
-region = "us-east-1"
+region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"production\""
 image_repositories = []
