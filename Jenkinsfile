@@ -159,7 +159,7 @@ pipeline {
             cd "$WORKSPACE/gitCode"
             
             git checkout master
-            git merge develop 
+            git merge origin/develop 
 
             file testDevel
 
