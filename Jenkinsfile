@@ -120,5 +120,4 @@ stages {
     }
   }
 }
-pytest --junitxml=result-rest.xml $(pwd)/test/rest
 
