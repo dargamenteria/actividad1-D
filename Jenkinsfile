@@ -6,6 +6,7 @@ pipeline {
   environment {
     AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
     AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+    AWS_SESSION_TOKEN     = credentials('aws_session_token')
   }
   stages {
     stage('Pipeline Info') {
@@ -105,7 +106,11 @@ pipeline {
             sh ('''
               echo "Test phase"
               cd "$WORKSPACE/gitCode"
-              export BASE_URL=$(AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
+              export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+              export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+              export AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+
+              export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
               pytest --junitxml=result-rest.xml $(pwd)/test/integration
               '''
             )
