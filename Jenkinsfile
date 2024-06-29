@@ -129,8 +129,7 @@ pipeline {
               export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
               export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
 
-              pytest $(pwd)/test/integration/todoApiTest.py
-              #pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
+              pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
               '''
             )
           }
