@@ -42,6 +42,9 @@ sgs_rules = [
   {
     sg = "sg1", from = 80, to = 80, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow http [tf]"
   },
+  {
+    sg = "sg1", from = 443, to = 443, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow https [tf]"
+  },
 
 
   ## EGREES RULES
