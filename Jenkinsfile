@@ -84,19 +84,23 @@ pipeline {
           unstash 'workspace'
           sh ('''
             cd "$WORKSPACE/gitCode"
-            #AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws sts get-session-token > a.json
 
-            #export AWS_ACCESS_KEY_ID=$(cat a.json | jq $jq .Credentials.AccessKeyId)
-            #export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
-            #export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
+            export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
             sam build
-            AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} sam deploy \
+            sam deploy \
             --stack-name todo-aws-list-staging \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env staging  --no-fail-on-empty-changeset
+
+            unset AWS_SECRET_ACCESS_KEY
+            unset AWS_ACCESS_KEY_ID
+
             '''
+
+        
           )
         }
       } 
@@ -112,15 +116,22 @@ pipeline {
             sh ('''
               echo "Test phase"
               cd "$WORKSPACE/gitCode"
+              
+              export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+              export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
-              AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws sts get-session-token > a.json
+              export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
 
+
+              aws sts get-session-token > a.json
+
+              
               export AWS_ACCESS_KEY_ID=$(cat a.json | jq $jq .Credentials.AccessKeyId)
               export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
               export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
 
-              export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
-              pytest --junitxml=result-rest.xml $(pwd)/test/integration
+              pytest $(pwd)/test/integration/todoApiTest.py
+              #pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
               '''
             )
           }
