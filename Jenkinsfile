@@ -1,4 +1,4 @@
-@Library('test-pipeline-library')_
+@Library('jenkins/test-pipeline-library')_
 
 
 pipeline {
