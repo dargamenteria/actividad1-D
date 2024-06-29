@@ -4,7 +4,7 @@
 pipeline {
   agent { label 'linux' }
 
-    stages {
+  stages {
     stage('Pipeline Info') {
       steps {
         sh ('echo "        pipelineBanner "')
@@ -72,9 +72,32 @@ pipeline {
       }
     }
 
+    stage ('SAM deploy') {
+      agent { label 'linux' }
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          pipelineBanner()
+          unstash 'workspace'
+          sh ('''
+            cd "$WORKSPACE/gitCode"
+            sam build
+            sam deploy \
+            --stack-name todo-aws-list-staging \
+            --region eu-central-1 \
+            --disable-rollback  \
+            --config-env staging  --no-fail-on-empty-changeset
+            '''
+          )
+        }
+      } 
+    }
 
   }
-
+  post {
+    always {
+      cleanWs()
+    }
+  }
 }
 
 
