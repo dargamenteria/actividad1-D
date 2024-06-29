@@ -164,7 +164,7 @@ pipeline {
             git fetch --all
 
             git checkout master
-            git merge develop 
+            git merge origin/develop 
 
             cat testDevel
 
