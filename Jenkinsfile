@@ -100,7 +100,7 @@ pipeline {
 
             '''
 
-        
+
           )
         }
       } 
@@ -116,7 +116,7 @@ pipeline {
             sh ('''
               echo "Test phase"
               cd "$WORKSPACE/gitCode"
-              
+
               export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
               export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
@@ -129,8 +129,8 @@ pipeline {
               export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
               export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
 
-              #pytest $(pwd)/test/integration/todoApiTest.py
-              pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
+              pytest $(pwd)/test/integration/todoApiTest.py
+              #pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
               '''
             )
           }
@@ -138,19 +138,17 @@ pipeline {
       }
     }
 
-    stage ('Result Test'){
+    stage ('Test Results') {
       agent { label 'linux' }
-        steps {
-          pipelineBanner()
-          catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-            unstash 'workspace'
-              junit allowEmptyResults: true, testResults: 'gitCode/result-*.xml'
-          }
+      steps {
+        pipelineBanner()
+        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+          unstash 'workspace'
+          junit allowEmptyResults: true, testResults: 'gitCode/result-*.xml'
         }
       }
     }
-
-  }
+  }//end stages
 
   post {
     always {
