@@ -6,8 +6,8 @@ pipeline {
   environment {
     AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
     AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
-    AWS_SESSION_TOKEN     = credentials('aws_session_token')
   }
+
   stages {
     stage('Pipeline Info') {
       steps {
@@ -84,8 +84,14 @@ pipeline {
           unstash 'workspace'
           sh ('''
             cd "$WORKSPACE/gitCode"
+            AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} aws sts get-session-token > a.json
+
+            export AWS_ACCESS_KEY_ID=$(cat a.json | jq $jq .Credentials.AccessKeyId)
+            export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
+            export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
+
             sam build
-            AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} sam deploy \
+             sam deploy \
             --stack-name todo-aws-list-staging \
             --region eu-central-1 \
             --disable-rollback  \
