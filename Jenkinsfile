@@ -21,7 +21,7 @@ pipeline {
           pipelineBanner()
           sh ('''
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
-            git clone https://${GIT_TOKEN}@github.com/dargamenteria/actividad1-B $WORKSPACE/gitCode
+            git clone https://${GIT_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             '''
           )
           stash  (name: 'workspace')
@@ -81,6 +81,7 @@ pipeline {
           pipelineBanner()
           unstash 'workspace'
           sh ('''
+            cd "$WORKSPACE/gitCode"
             sam build
             sam deploy \
             --stack-name todo-aws-list-staging \
@@ -93,31 +94,6 @@ pipeline {
       } 
     }
 
-    stage('Perfomance checks') {
-      agent { label 'flask' }
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          pipelineBanner()
-          unstash 'workspace'
-          sh ('''
-            echo "Test phase"
-            cd "$WORKSPACE/gitCode"
-
-            export PYTHONPATH=.
-            export FLASK_APP=$(pwd)/app/api.py
-
-            flask run -h 0.0.0.0 -p 5000 &
-            while [ "$(ss -lnt | grep -E "5000" | wc -l)" != "1" ] ; do echo "No perative yet" ; sleep 1; done
-
-            scp $(pwd)/test/jmeter/flaskplan.jmx jenkins@slave2.paranoidworld.es:
-            ssh jenkins@slave2.paranoidworld.es 'rm ~/flaskplan.jtl; /apps/jmeter/bin/jmeter -n -t ~/flaskplan.jmx -l ~/flaskplan.jtl'
-            scp jenkins@slave2.paranoidworld.es:flaskplan.jtl .
-
-            ''')
-          perfReport sourceDataFiles: 'gitCode/flaskplan.jtl'
-        }
-      }
-    }
   }
   post {
     always {
