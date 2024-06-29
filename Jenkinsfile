@@ -27,6 +27,50 @@ pipeline {
       }
     }
 
+    stage ('Static Test'){
+      parallel {
+        stage('Static code Analysis') {
+          agent { label 'linux' }
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              pipelineBanner()
+              unstash 'workspace'
+              sh ('''
+                cd "$WORKSPACE/gitCode"
+                flake8 --format=pylint --exit-zero --max-line-length 120 $(pwd)/src >$(pwd)/flake8.out
+                '''
+              )
+              recordIssues tools: [flake8(name: 'Flake8', pattern: 'gitCode/flake8.out')],
+                qualityGates: [
+                  [threshold: 8, type: 'TOTAL', critically: 'UNSTABLE'],
+                  [threshold: 10,  type: 'TOTAL', critically: 'FAILURE', unstable: false ]
+                ]
+              // stash  (name: 'workspace')
+            }
+          }
+        }
+        stage('Security Analysis') {
+          agent { label 'linux' }
+          steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              pipelineBanner()
+              unstash 'workspace'
+              sh ('''
+                cd "$WORKSPACE/gitCode"
+                bandit  -r src --format custom --msg-template     "{abspath}:{line}: {test_id}[bandit]: {severity}: {msg}"  -o $(pwd)/bandit.out || echo "Controlled exit"
+                '''
+              )
+              recordIssues tools: [pyLint(pattern: 'gitCode/bandit.out')],
+                qualityGates: [
+                  [threshold: 1, type: 'TOTAL', critically: 'UNSTABLE'],
+                  [threshold: 2, type: 'TOTAL', critically: 'FAILURE', unstable: false]
+                ]
+              // stash  (name: 'workspace')
+            }
+          }
+        }
+      }
+    }
 
 
   }
