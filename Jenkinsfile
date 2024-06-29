@@ -79,7 +79,7 @@ pipeline {
     stage ('SAM deploy') {
       agent { label 'linux' }
       steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+        catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
           pipelineBanner()
           unstash 'workspace'
           sh ('''
@@ -109,7 +109,7 @@ pipeline {
     stage ('Test Rest') {
       agent { label 'linux' }
       steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+        catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
           pipelineBanner()
           unstash 'workspace'
           lock ('test-resources'){
@@ -133,6 +133,7 @@ pipeline {
               '''
             )
           }
+          stash  (name: 'workspace')
         }
       }
     }
