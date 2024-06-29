@@ -122,22 +122,34 @@ pipeline {
 
               export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
 
-
               aws sts get-session-token > a.json
+              # TODO do not show the passwords find another solution for masking
 
-              
               export AWS_ACCESS_KEY_ID=$(cat a.json | jq $jq .Credentials.AccessKeyId)
               export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
               export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
 
-              pytest $(pwd)/test/integration/todoApiTest.py
-              #pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
+              #pytest $(pwd)/test/integration/todoApiTest.py
+              pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
               '''
             )
           }
         }
       }
     }
+
+    stage ('Result Test'){
+      agent { label 'linux' }
+        steps {
+          pipelineBanner()
+          catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+            unstash 'workspace'
+              junit allowEmptyResults: true, testResults: 'gitCode/result-*.xml'
+          }
+        }
+      }
+    }
+
   }
 
   post {
