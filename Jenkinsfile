@@ -155,15 +155,16 @@ pipeline {
       steps {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
           pipelineBanner()
-          unstash 'workspace'
           sh ('''
+            [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
+            git clone https://github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
+
             cd "$WORKSPACE/gitCode"
-           
+
+            git checkout master
             cat testDevel
 
             git fetch --all
-
-            git checkout master
             git merge origin/develop 
 
             cat testDevel
