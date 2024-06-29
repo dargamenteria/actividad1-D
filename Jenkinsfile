@@ -174,7 +174,7 @@ pipeline {
 
             sam build
             sam deploy \
-            --stack-name todo-aws-list-staging \
+            --stack-name todo-aws-list-production \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env production  --no-fail-on-empty-changeset
