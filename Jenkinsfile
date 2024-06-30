@@ -27,9 +27,7 @@ pipeline {
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             git checkout develop
 
-            cd "$WORKSPACE/gitCode"
             curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/staging/samconfig.toml
-
             ls -arlt 
             '''
           )
@@ -98,6 +96,7 @@ pipeline {
             sam build
             sam deploy \
             --stack-name todo-aws-list-staging \
+            --config-file samconfig.toml \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env staging  --no-fail-on-empty-changeset
