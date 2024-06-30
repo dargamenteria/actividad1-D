@@ -14,7 +14,7 @@ image_repositories = []
 [staging.deploy]
 [staging.deploy.parameters]
 stack_name = "todo-list-aws-staging"
-s3_bucket = "marga-deploy-bucket-staging-unir"
+s3_bucket = "marga-deploy-bucket-staging"
 s3_prefix = "todo-list-aws"
 region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
@@ -25,7 +25,7 @@ image_repositories = []
 [production.deploy]
 [production.deploy.parameters]
 stack_name = "todo-list-aws-production"
-s3_bucket = "marga-deploy-bucket-prod-unir"
+s3_bucket = "marga-deploy-bucket-production"
 s3_prefix = "todo-list-aws"
 region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
