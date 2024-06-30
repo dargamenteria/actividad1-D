@@ -34,16 +34,21 @@ sgs_rules = [
 
   ##INGRESS RULES
   {
-    sg = "sg1", from = 22, to = 22, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow ssh  [tf]"
+    sg = "sg1", from = 22, to = 22, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow ssh  [tf]"
   },
   {
-    sg = "sg1", from = 8080, to = 8080, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow 8080 [tf]"
+    sg = "sg1", from = 8080, to = 8080, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow 8080 [tf]"
   },
   {
-    sg = "sg1", from = 80, to = 80, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow http [tf]"
+    sg = "sg1", from = 80, to = 80, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow http [tf]"
   },
   {
-    sg = "sg1", from = 443, to = 443, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow https [tf]"
+    sg = "sg1", from = 443, to = 443, ingress = true, protocol = "tcp", cidr = "arga", ipv6_cidr = "", source_sg = "", description = "Allow https [tf]"
+  },
+  {
+    sg = "sg1", from = 22, to = 22, ingress = true, protocol = "tcp", cidr = "jenkins", ipv6_cidr = "", source_sg = "", description = "Allow https [tf]"
+    }, {
+    sg = "sg1", from = 22, to = 22, ingress = true, protocol = "tcp", cidr = "0.0.0.0/0", ipv6_cidr = "", source_sg = "", description = "Allow https [tf]"
   },
 
 
