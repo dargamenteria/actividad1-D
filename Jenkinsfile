@@ -25,7 +25,7 @@ pipeline {
           sh ('''
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
-            git checkout develop
+            git checkout master
             '''
           )
           stash  (name: 'workspace')
@@ -33,52 +33,8 @@ pipeline {
       }
     }
 
-    stage ('Static Test'){
-      parallel {
-        stage('Static code Analysis') {
-          agent { label 'linux' }
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              pipelineBanner()
-              unstash 'workspace'
-              sh ('''
-                cd "$WORKSPACE/gitCode"
-                flake8 --format=pylint --exit-zero --max-line-length 120 $(pwd)/src >$(pwd)/flake8.out
-                '''
-              )
-              recordIssues tools: [flake8(name: 'Flake8', pattern: 'gitCode/flake8.out')],
-                qualityGates: [
-                  [threshold: 8, type: 'TOTAL', critically: 'UNSTABLE'],
-                  [threshold: 10,  type: 'TOTAL', critically: 'FAILURE', unstable: false ]
-                ]
-              // stash  (name: 'workspace')
-            }
-          }
-        }
-        stage('Security Analysis') {
-          agent { label 'linux' }
-          steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              pipelineBanner()
-              unstash 'workspace'
-              sh ('''
-                cd "$WORKSPACE/gitCode"
-                bandit  -r src --format custom --msg-template     "{abspath}:{line}: {test_id}[bandit]: {severity}: {msg}"  -o $(pwd)/bandit.out || echo "Controlled exit"
-                '''
-              )
-              recordIssues tools: [pyLint(pattern: 'gitCode/bandit.out')],
-                qualityGates: [
-                  [threshold: 1, type: 'TOTAL', critically: 'UNSTABLE'],
-                  [threshold: 2, type: 'TOTAL', critically: 'FAILURE', unstable: false]
-                ]
-              // stash  (name: 'workspace')
-            }
-          }
-        }
-      }
-    }
-
-    stage ('SAM deploy') {
+    
+    stage ('Deploy') {
       agent { label 'linux' }
       steps {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -92,7 +48,7 @@ pipeline {
 
             sam build
             sam deploy \
-            --stack-name todo-aws-list-staging \
+            --stack-name todo-aws-list-production \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env staging  --no-fail-on-empty-changeset
@@ -130,7 +86,7 @@ pipeline {
               export AWS_SECRET_ACCESS_KEY=$(cat a.json | jq $jq .Credentials.SecretAccessKey)
               export AWS_SESSION_TOKEN=$(cat a.json | jq $jq .Credentials.SessionToken)
 
-              pytest --junitxml=result-rest.xml $(pwd)/test/integration/todoApiTest.py
+              pytest --junitxml=result-rest.xml -m readonly $(pwd)/test/integration/todoApiTest.py
               '''
             )
           }
@@ -150,32 +106,7 @@ pipeline {
       }
     }
 
-    stage ('Promote') {
-      agent { label 'linux' }
-      steps {
-        catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-          pipelineBanner()
-          sh ('''
-            [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
-            git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
-
-            cd "$WORKSPACE/gitCode"
-
-            git checkout master
-            cat testDevel
-
-            git fetch --all
-            git merge origin/develop 
-
-            cat testDevel
-
-            '''
-
-          )
-        }
-      } 
-    }
-
+   
   }//end stages
 
   post {
