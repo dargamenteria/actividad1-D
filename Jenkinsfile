@@ -47,12 +47,11 @@ pipeline {
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
             sam build
-            sam deploy \ 
+            sam deploy \
             --stack-name todo-aws-list-production \
             --region eu-central-1 \
-            --disable-rollback \
-            --config-env production \
-            --no-fail-on-empty-changeset
+            --disable-rollback  \
+            --config-env production  --no-fail-on-empty-changeset
 
             unset AWS_SECRET_ACCESS_KEY
             unset AWS_ACCESS_KEY_ID
