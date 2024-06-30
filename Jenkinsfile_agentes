@@ -18,7 +18,7 @@ pipeline {
     }
 
     stage('Get code') {
-      agent { label 'master' }
+      agent { label 'linux' }
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           pipelineBanner()
@@ -64,7 +64,7 @@ pipeline {
     }
 
     stage ('Test Rest') {
-      agent { label 'tester' }
+      agent { label 'linux' }
       steps {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
           pipelineBanner()
