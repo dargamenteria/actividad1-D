@@ -18,6 +18,7 @@ pipeline {
     }
 
     stage('Get code') {
+      agent { label 'builtin' }
 
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
