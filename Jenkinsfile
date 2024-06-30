@@ -26,7 +26,6 @@ pipeline {
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             git checkout develop
-            cat testDevel
             '''
           )
           stash  (name: 'workspace')
