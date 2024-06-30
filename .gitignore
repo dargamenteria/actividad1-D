@@ -9,3 +9,4 @@ global_resources/
 .terraform/
 .terraform.*
 terraform.tfstate*
+samconfig.toml
