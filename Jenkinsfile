@@ -52,7 +52,7 @@ pipeline {
             --region eu-central-1 \
             --disable-rollback \
             --config-env production \
-            --no-fail-on-empty-changes
+            --no-fail-on-empty-changeset
 
             unset AWS_SECRET_ACCESS_KEY
             unset AWS_ACCESS_KEY_ID
