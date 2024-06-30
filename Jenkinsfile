@@ -49,7 +49,8 @@ pipeline {
 
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-
+            
+            cat ../samconfig.toml
             sam build
             sam deploy \
             --stack-name todo-aws-list-production \
