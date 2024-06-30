@@ -172,6 +172,7 @@ pipeline {
 
             git fetch --all
             git merge origin/develop -m "Merge from DEV" --no-ff
+            git push origin master
 
             cat testDevel
 
