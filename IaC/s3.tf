@@ -6,22 +6,22 @@
 #}
 
 
-module "s3_server_anjana_buckets" {
-  source = "terraform-aws-modules/s3-bucket/aws"
-  version = "~>4.1.2"
+module "s3_server_buckets" {
+  source   = "terraform-aws-modules/s3-bucket/aws"
+  version  = "~>4.1.2"
   for_each = toset(var.s3_bucket_names)
-  bucket   = "${each.value}-${var.client_name}"
+  bucket   = each.value
   #acl    = "private"
   control_object_ownership = true
 
   versioning = {
     status = false
   }
-#  attach_policy           = true
-#  block_public_policy     = true
-#  block_public_acls       = true
-#  ignore_public_acls      = true
-#  restrict_public_buckets = true
+  #  attach_policy           = true
+  #  block_public_policy     = true
+  #  block_public_acls       = true
+  #  ignore_public_acls      = true
+  #  restrict_public_buckets = true
 
   server_side_encryption_configuration = {
     rule = {

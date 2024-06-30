@@ -133,7 +133,7 @@ ec2_instances = {
 
 s3_bucket_names = [
   "marga-deploy-bucket",
-  "marga-deploy-bucket-prod",
+  "marga-deploy-bucket-production",
   "marga-deploy-bucket-staging",
 
 ]
