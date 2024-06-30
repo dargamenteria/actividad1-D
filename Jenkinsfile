@@ -28,7 +28,7 @@ pipeline {
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             git checkout master
 
-            curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/staging/samconfig.toml
+            curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/production/samconfig.toml
             ls -arlt
             '''
           )
