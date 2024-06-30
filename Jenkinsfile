@@ -27,6 +27,9 @@ pipeline {
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
             git checkout master
+
+            curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/staging/samconfig.toml
+            ls -arlt
             '''
           )
           stash  (name: 'workspace')
@@ -50,6 +53,7 @@ pipeline {
             sam build
             sam deploy \
             --stack-name todo-aws-list-production \
+            --config-file file ../samconfig.toml \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env production  --no-fail-on-empty-changeset
