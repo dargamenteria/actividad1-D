@@ -167,7 +167,7 @@ pipeline {
             cat testDevel
 
             git fetch --all
-            git merge origin/develop "Merge from DEV" --no-ff
+            git merge origin/develop -m "Merge from DEV" --no-ff
 
             cat testDevel
 
