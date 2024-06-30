@@ -158,7 +158,8 @@ pipeline {
           sh ('''
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
-            git config merge.ours.driver true
+            git config --global merge.ours.driver true
+            git config global --list
 
             cd "$WORKSPACE/gitCode"
 
@@ -166,7 +167,7 @@ pipeline {
             cat testDevel
 
             git fetch --all
-            git merge origin/develop 
+            git merge origin/develop "Merge from DEV" --no-ff
 
             cat testDevel
 
