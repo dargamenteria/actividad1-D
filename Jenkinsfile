@@ -29,7 +29,7 @@ pipeline {
             git checkout master
 
             curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/production/samconfig.toml
-            ls -arlt
+            cat samconfig.toml 
             '''
           )
           stash  (name: 'workspace')
