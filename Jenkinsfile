@@ -29,6 +29,8 @@ pipeline {
 
             cd "$WORKSPACE/gitCode"
             curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/staging/samconfig.toml
+
+            ls -arlt 
             '''
           )
           stash  (name: 'workspace')
