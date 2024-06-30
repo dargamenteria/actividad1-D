@@ -158,6 +158,7 @@ pipeline {
           sh ('''
             [ -e "$WORKSPACE/gitCode" ] && rm -fr "$WORKSPACE/gitCode"
             git clone https://${GITHUB_TOKEN}@github.com/dargamenteria/actividad1-D $WORKSPACE/gitCode
+            git config merge.ours.driver true
 
             cd "$WORKSPACE/gitCode"
 
