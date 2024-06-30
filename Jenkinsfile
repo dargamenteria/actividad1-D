@@ -51,7 +51,7 @@ pipeline {
             --stack-name todo-aws-list-production \
             --region eu-central-1 \
             --disable-rollback  \
-            --config-env staging  --no-fail-on-empty-changeset
+            --config-env production  --no-fail-on-empty-changeset
 
             unset AWS_SECRET_ACCESS_KEY
             unset AWS_ACCESS_KEY_ID
@@ -77,7 +77,7 @@ pipeline {
               export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
               export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
-              export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-staging     --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
+              export BASE_URL=$(aws cloudformation describe-stacks --stack-name todo-aws-list-production    --query 'Stacks[0].Outputs[?OutputKey==`BaseUrlApi`].OutputValue'     --output text) 
 
               aws sts get-session-token > a.json
               # TODO do not show the passwords find another solution for masking
