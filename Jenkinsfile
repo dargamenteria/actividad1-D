@@ -18,7 +18,7 @@ pipeline {
     }
 
     stage('Get code') {
-      agent { label 'builtin' }
+      agent { label 'linux' }
 
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -53,7 +53,7 @@ pipeline {
             sam build
             sam deploy \
             --stack-name todo-aws-list-production \
-            --config-file file ../samconfig.toml \
+            --config-file ../samconfig.toml \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env production  --no-fail-on-empty-changeset
@@ -69,7 +69,7 @@ pipeline {
     }
 
     stage ('Test Rest') {
-      agent { label 'tester' }
+      agent { label 'linux' }
       steps {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
           pipelineBanner()
@@ -101,7 +101,7 @@ pipeline {
     }
 
     stage ('Test Results') {
-      agent { label 'anal' }
+      agent { label 'linux' }
       steps {
         pipelineBanner()
         catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
