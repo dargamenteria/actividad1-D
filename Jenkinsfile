@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Pipeline Info') {
       steps {
-        sh ('echo "        pipelineBanner "')
+        sh ('echo "  DEV      pipelineBanner "')
         pipelineBanner()
       }
     }
