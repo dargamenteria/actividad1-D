@@ -14,18 +14,19 @@ DEFAULT_TIMEOUT = 2  # in secs
 
 @pytest.mark.api
 class TestApi(unittest.TestCase):
-    
+
     def setUp(self):
         self.assertIsNotNone(BASE_URL, "URL no configurada")
         self.assertTrue(len(BASE_URL) > 8, "URL no configurada")
 
+    @pytest.mark.readonly
     def test_api_listtodos(self):
         print('---------------------------------------')
         print('Starting - integration test List TODO')
         #Add TODO
         url = BASE_URL+"/todos"
         data = {
-         "text": "Integration text example"
+            "text": "Integration text example"
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
@@ -47,14 +48,15 @@ class TestApi(unittest.TestCase):
             response.status_code, 200, "Error en la petición API a {url}"
         )
         self.assertTrue(response.json())
-        
+
         print('End - integration test List TODO')
+
     def test_api_addtodo(self):
         print('---------------------------------------')
         print('Starting - integration test Add TODO')
         url = BASE_URL+"/todos"
         data = {
-         "text": "Integration text example"
+            "text": "Integration text example"
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
@@ -74,13 +76,15 @@ class TestApi(unittest.TestCase):
             response.status_code, 200, "Error en la petición API a {url}"
         )
         print('End - integration test Add TODO')
+
+    @pytest.mark.readonly
     def test_api_gettodo(self):
         print('---------------------------------------')
         print('Starting - integration test Get TODO')
         #Add TODO
         url = BASE_URL+"/todos"
         data = {
-         "text": "Integration text example - GET"
+            "text": "Integration text example - GET"
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
@@ -111,14 +115,14 @@ class TestApi(unittest.TestCase):
             response.status_code, 200, "Error en la petición API a {url}"
         )
         print('End - integration test Get TODO')
-    
+
     def test_api_updatetodo(self):
         print('---------------------------------------')
         print('Starting - integration test Update TODO')
         #Add TODO
         url = BASE_URL+"/todos"
         data = {
-         "text": "Integration text example - Initial"
+            "text": "Integration text example - Initial"
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
@@ -135,8 +139,8 @@ class TestApi(unittest.TestCase):
         #Update TODO
         url = BASE_URL+"/todos/" + ID_TODO
         data = {
-         "text": "Integration text example - Modified",
-         "checked": "true"
+            "text": "Integration text example - Modified",
+            "checked": "true"
         }
         response = requests.put(url, data=json.dumps(data))
         json_response = response.json()
@@ -165,13 +169,14 @@ class TestApi(unittest.TestCase):
             response.status_code, 200, "Error en la petición API a {url}"
         )
         print('End - integration test Update TODO')
+
     def test_api_deletetodo(self):
         print('---------------------------------------')
         print('Starting - integration test Delete TODO')
         #Add TODO
         url = BASE_URL+"/todos"
         data = {
-         "text": "Integration text example - Initial"
+            "text": "Integration text example - Initial"
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
@@ -199,4 +204,4 @@ class TestApi(unittest.TestCase):
             response.status_code, 404, "Error en la petición API a {url}"
         )
         print('End - integration test Delete TODO')
-    
+
