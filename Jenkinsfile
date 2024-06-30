@@ -30,6 +30,8 @@ pipeline {
 
             curl -sSO https://raw.githubusercontent.com/dargamenteria/actividad1-D-_config/production/samconfig.toml
             cat samconfig.toml 
+            cat testDevel
+
             '''
           )
           stash  (name: 'workspace')
