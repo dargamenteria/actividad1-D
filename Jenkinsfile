@@ -96,7 +96,7 @@ pipeline {
             sam build
             sam deploy \
             --stack-name todo-aws-list-staging \
-            --config-file samconfig.toml \
+            --config-file ../samconfig.toml \
             --region eu-central-1 \
             --disable-rollback  \
             --config-env staging  --no-fail-on-empty-changeset
