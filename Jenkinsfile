@@ -96,7 +96,7 @@ pipeline {
     }
 
     stage ('Test Results') {
-      agent { label 'linux' }
+      agent { label 'anal' }
       steps {
         pipelineBanner()
         catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
