@@ -18,7 +18,7 @@ pipeline {
     }
 
     stage('Get code') {
-      agent { label 'master' }
+
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           pipelineBanner()
