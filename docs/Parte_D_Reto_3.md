@@ -6,14 +6,9 @@
     curl+shellscript).](#un-agente-para-las-pruebas-de-la-api-rest-pytest-o-curlshellscript.)
 -   [Resumen de
     ejecución](#resumen-de-ejecución)
-<<<<<<< HEAD
     -   [Pipelines](#pipelines)
         -   [master](#master)
         -   [develop](#develop)
-=======
-    -   [master](#master)
-    -   [develop](#develop)
->>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
     -   [Log de ejecución](#log-de-ejecución)
 
 # Reto 3 -- Distribución en agentes
@@ -1029,7 +1024,6 @@ Test phase
 + aws sts get-session-token
 + jq .Credentials.AccessKeyId
 + cat a.json
-<<<<<<< HEAD
 + AWS_ACCESS_KEY_ID="XXXX"
 + cat a.json
 + jq .Credentials.SecretAccessKey
@@ -1037,15 +1031,6 @@ Test phase
 + cat a.json
 + jq .Credentials.SessionToken
 + AWS_SESSION_TOKEN="AAAA"
-=======
-+ export AWS_ACCESS_KEY_ID="XXXX"
-+ cat a.json
-+ jq .Credentials.SecretAccessKey
-+ export AWS_SECRET_ACCESS_KEY="YYYY"
-+ cat a.json
-+ jq .Credentials.SessionToken
-+ export AWS_SESSION_TOKEN="AAAA"
->>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
 + pwd
 + pytest --junitxml=result-rest.xml /home/ubuntu/workspace/CI_agentes/gitCode/test/integration/todoApiTest.py
 ============================= test session starts ==============================
