@@ -13,8 +13,10 @@
 
 # Reto 3 -- Distribución en agentes
 
-Los agentes se etiquetan de la siguiente manera \* Nodo Cordinador:
-builtin \* Slave1: linux, agent1, anal \* Slave2: linux, agent2,tester
+Los agentes se etiquetan de la siguiente manera 
+* Nodo Cordinador: builtin 
+* Slave1: linux, agent1, anal 
+* Slave2: linux, agent2,tester
 
 # Un agente para las pruebas de análisis estático (Flake8 y Bandit).
 
