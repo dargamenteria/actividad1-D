@@ -6,9 +6,14 @@
     curl+shellscript).](#un-agente-para-las-pruebas-de-la-api-rest-pytest-o-curlshellscript.)
 -   [Resumen de
     ejecución](#resumen-de-ejecución)
+<<<<<<< HEAD
     -   [Pipelines](#pipelines)
         -   [master](#master)
         -   [develop](#develop)
+=======
+    -   [master](#master)
+    -   [develop](#develop)
+>>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
     -   [Log de ejecución](#log-de-ejecución)
 
 # Reto 3 -- Distribución en agentes
@@ -104,10 +109,16 @@ Forzamos que se ejecute en el *slave2*
 # Resumen de ejecución
 
 Se muestra a continuación la ejecución de las pipelines
+<<<<<<< HEAD
 ![62f2fdc5d0a05f5e63bad77e8ea85e8a.png](_resources/62f2fdc5d0a05f5e63bad77e8ea85e8a-1.png)
 ![a6654f9703663898569c77138afe0fe5.png](_resources/a6654f9703663898569c77138afe0fe5-1.png)
 
 ## Pipelines
+=======
+![62f2fdc5d0a05f5e63bad77e8ea85e8a.png](_resources/62f2fdc5d0a05f5e63bad77e8ea85e8a.png)
+![a6654f9703663898569c77138afe0fe5.png](_resources/a6654f9703663898569c77138afe0fe5.png)
+\## Pipelines
+>>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
 
 ### master
 
@@ -1018,6 +1029,7 @@ Test phase
 + aws sts get-session-token
 + jq .Credentials.AccessKeyId
 + cat a.json
+<<<<<<< HEAD
 + AWS_ACCESS_KEY_ID="XXXX"
 + cat a.json
 + jq .Credentials.SecretAccessKey
@@ -1025,6 +1037,15 @@ Test phase
 + cat a.json
 + jq .Credentials.SessionToken
 + AWS_SESSION_TOKEN="AAAA"
+=======
++ export AWS_ACCESS_KEY_ID="XXXX"
++ cat a.json
++ jq .Credentials.SecretAccessKey
++ export AWS_SECRET_ACCESS_KEY="YYYY"
++ cat a.json
++ jq .Credentials.SessionToken
++ export AWS_SESSION_TOKEN="AAAA"
+>>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
 + pwd
 + pytest --junitxml=result-rest.xml /home/ubuntu/workspace/CI_agentes/gitCode/test/integration/todoApiTest.py
 ============================= test session starts ==============================
