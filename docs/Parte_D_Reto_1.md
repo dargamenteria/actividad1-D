@@ -2750,10 +2750,10 @@ Aquí se muestra el log de ejecución
     + aws sts get-session-token
     + cat a.json
     + jq .Credentials.AccessKeyId
-    + export AWS_ACCESS_KEY_ID="XXXXX"
+    + AWS_ACCESS_KEY_ID="XXXX"
     + cat a.json
     + jq .Credentials.SecretAccessKey
-    + export AWS_SECRET_ACCESS_KEY="YYYY"
+    + AWS_SECRET_ACCESS_KEY="YYYY"
     + cat a.json
     + jq .Credentials.SessionToken
     + AWS_SESSION_TOKEN="AAAA"
@@ -3394,10 +3394,10 @@ Test phase
 + aws sts get-session-token
 + cat a.json
 + jq .Credentials.AccessKeyId
-+ export AWS_ACCESS_KEY_ID="XXXX"
++ AWS_ACCESS_KEY_ID="XXXX"
 + cat a.json
 + jq .Credentials.SecretAccessKey
-+ export AWS_SECRET_ACCESS_KEY="YYYY"
++ AWS_SECRET_ACCESS_KEY="YYYY"
 + cat a.json
 + jq .Credentials.SessionToken
 + AWS_SESSION_TOKEN="AAAA"
@@ -3584,7 +3584,7 @@ Finished: SUCCESS
 Despliegue de los dos *stacks*
 
 ![64fb6cc4035a3c649ff6e3695a72d62c.png](_resources/64fb6cc4035a3c649ff6e3695a72d62c.png)
-\## Resumen de ejecución La siguiente imagen muestra la estructura de la
+## Resumen de ejecución La siguiente imagen muestra la estructura de la
 *pipeline*
 ![e0e215a5d584c9ddf4a5f325c0d74ecf.png](_resources/e0e215a5d584c9ddf4a5f325c0d74ecf.png)
 Aquí se puede observar la *pipeline* con los gráficos de cobertura y
@@ -4316,13 +4316,13 @@ Test phase
 + aws sts get-session-token
 + cat a.json
 + jq .Credentials.AccessKeyId
-+ export AWS_ACCESS_KEY_ID="ASIA4MTWIEMWDCDTQI2V"
++ AWS_ACCESS_KEY_ID="XXXX"
 + cat a.json
 + jq .Credentials.SecretAccessKey
-+ export AWS_SECRET_ACCESS_KEY="wKGoEbqTGm2/FLA3V4938l823s9LqMe13pQQyIex"
++ AWS_SECRET_ACCESS_KEY="YYYY"
 + cat a.json
 + jq .Credentials.SessionToken
-+ export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEI3//////////wEaDGV1LWNlbnRyYWwtMSJHMEUCIHE1GK42xQb+TOM+plnEvb6tZC/F4SCQj2QCp72vplLUAiEA5GuiJTLJj4HTtMnLPy2Xh7am5TWaib/LWl2K6ICN3oQq6wEIRhAAGgw4NTE3MjUyNjM2NjAiDMkIIc8APEu+9hMsPyrIAVNwB41f0xoauJf1YaR21h9TfnBqhVCaMf2QYJ36kG9ApuvNTuL6P9LJMCQGE2IzGygG+a55plkdShC8MmA8pbWtwWG+rsXGPOXM/joaAtcOsP4PScFB3I3pwtecGlUzyyWdaeWwvRFWI5VT0cUZVuY/IqlFavcjGoRzgXEcnyijuzMc4zxE4dHf3qPvnTy//XuzWf1eTNWwMJVKB1vsPOuDEhdEkvwExTy2cy9MNymXeI4JixpiwmRd5UR+jCUvmyCOlkqVpGBlMO2thbQGOpgBR0xk1WG/50cmGCXpit4yeqBSWbXT2Jv18ynPb4si1Xfyz0Mwf1Rj40GBLxHysRnanEW3URcXn85DSPiS7lYZv1KviY6FehbtVEO0t+3bCTiAWzTjoq250mZs4lqmPH4Rn3ztJHUA/ab5DPtYkt97oy7IxdDQpEN20WCOBs7lORchhqCVhXJIrbEg0nwZp73eMbpxe1a5Yyk="
++ AWS_SESSION_TOKEN="AAAA"
 + pwd
 + pytest --junitxml=result-rest.xml /home/ubuntu/workspace/CI/gitCode/test/integration/todoApiTest.py
 ============================= test session starts ==============================
