@@ -4,14 +4,17 @@
 
 # Reto 5 -- Pipeline Multibranch
 
-##Creación del pipeline multibranch, en Jenkins Creamos un *multibranch
-pipeline* \* Ajustamos el repositorio
+## Creación del pipeline multibranch, en Jenkins 
+* Creamos un *multibranch
+pipeline* 
+
+* Ajustamos el repositorio
 ![4849d8df729304f8f47ec6cd90fd8b16.png](_resources/4849d8df729304f8f47ec6cd90fd8b16.png)
-\* Ajustamos los parámetros
+* Ajustamos los parámetros
 ![89ef5df77799265840f8592639d2a325.png](_resources/89ef5df77799265840f8592639d2a325.png)
-\* Ajustamos los parámetros del webhook
+* Ajustamos los parámetros del webhook
 ![cd73d147533b86e23231341f34926370.png](_resources/cd73d147533b86e23231341f34926370.png)
-\* Creamos el webhook en Github
+* Creamos el webhook en Github
 ![19107ff17997cb37a22ecf08cbffca2b.png](_resources/19107ff17997cb37a22ecf08cbffca2b.png)
 ![901f080160df058b4dbd4bc9cd86312b.png](_resources/901f080160df058b4dbd4bc9cd86312b.png)
 ![2f6424a7330b62feb5c8a845c5873356.png](_resources/2f6424a7330b62feb5c8a845c5873356.png)
@@ -54,7 +57,8 @@ stage ('Promote') {
 Una vez realiados estos ajustes se observa la ejecución en serie de los
 pipelines
 ![0918cf2fa071c99c53f184546d56f2ac.png](_resources/0918cf2fa071c99c53f184546d56f2ac.png)
-\## CI log
+
+## CI log
 
 ``` bash
 Branch indexing
