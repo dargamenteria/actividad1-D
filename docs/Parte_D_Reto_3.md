@@ -104,16 +104,10 @@ Forzamos que se ejecute en el *slave2*
 # Resumen de ejecución
 
 Se muestra a continuación la ejecución de las pipelines
-<<<<<<< HEAD
-![62f2fdc5d0a05f5e63bad77e8ea85e8a.png](_resources/62f2fdc5d0a05f5e63bad77e8ea85e8a-1.png)
-![a6654f9703663898569c77138afe0fe5.png](_resources/a6654f9703663898569c77138afe0fe5-1.png)
-
 ## Pipelines
 =======
 ![62f2fdc5d0a05f5e63bad77e8ea85e8a.png](_resources/62f2fdc5d0a05f5e63bad77e8ea85e8a.png)
 ![a6654f9703663898569c77138afe0fe5.png](_resources/a6654f9703663898569c77138afe0fe5.png)
-\## Pipelines
->>>>>>> 684609aad8707f2cc10941dc860f30b80232d0da
 
 ### master
 
