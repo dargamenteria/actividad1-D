@@ -1,6 +1,7 @@
 -   [Reto 5 -- Pipeline
     Multibranch](#reto-5-pipeline-multibranch)
     -   [CD log](#cd-log)
+    -   [CI log](#ci-log)
 
 # Reto 5 -- Pipeline Multibranch
 
