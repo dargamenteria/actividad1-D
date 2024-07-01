@@ -3588,7 +3588,9 @@ Finished: SUCCESS
 Despliegue de los dos *stacks*
 
 ![64fb6cc4035a3c649ff6e3695a72d62c.png](_resources/64fb6cc4035a3c649ff6e3695a72d62c.png)
-## Resumen de ejecución La siguiente imagen muestra la estructura de la *pipeline*
+## Resumen de ejecución 
+
+La siguiente imagen muestra la estructura de la *pipeline*
 
 ![e0e215a5d584c9ddf4a5f325c0d74ecf.png](_resources/e0e215a5d584c9ddf4a5f325c0d74ecf.png)
 
